@@ -1,38 +1,65 @@
-import React, { useState } from 'react'
-import "./CommentForm.css"
+import React, { useState } from "react";
+import "./CommentForm.css";
 
-function CommentForm() {
-    let [formData,setFormData]=useState({
-      username:"",
-      remark:"",
-      rating:"5"
-    })
+function CommentForm({ addNewComment }) {
 
-let handleInputChange=(event)=>{
-    setFormData((currData)=>{
-      return {...currData,[event.target.name]:event.target.value}
-    })
-}
+  let [formData, setFormData] = useState({
+    username: "",
+    remark: "",
+    rating: "5"
+  });
 
-let handleSubmit=(event)=>{
-    console.log(formData)
+  let handleInputChange = (event) => {
+    setFormData((currData) => ({
+      ...currData,
+      [event.target.name]: event.target.value
+    }));
+  };
+
+  let handleSubmit = (event) => {
     event.preventDefault();
-    setFormData
+    console.log("submitted", formData);  // TO VERIFY
+
+    addNewComment(formData);
+
+    setFormData({
+      username: "",
+      remark: "",
+      rating: "5"
+    });
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+
+      <label htmlFor="username">UserName :</label>
+      <input
+        type="text"
+        name="username"
+        value={formData.username}
+        onChange={handleInputChange}
+      />
+
+      <label htmlFor="remark">Remark :</label>
+      <textarea
+        name="remark"
+        value={formData.remark}
+        onChange={handleInputChange}
+      />
+
+      <label htmlFor="rating">Rating :</label>
+      <input
+        type="number"
+        min={1}
+        max={5}
+        name="rating"
+        value={formData.rating}
+        onChange={handleInputChange}
+      />
+
+      <button type="submit">Add Comments</button>
+    </form>
+  );
 }
 
-return (
-    <div>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="username">UserName :</label>
-            <input placeholder='username'type='text' value={formData.username} onChange={handleInputChange} id='userName' name='username'/><br/>
-            <label htmlFor="remark">Remark :</label>
-            <textarea value={formData.remark} placeholder='Add few remarks' onChange={handleInputChange}id='remark' name='remark'>remarks</textarea><br/>
-            <label htmlFor="rating">Rating :</label>
-            <input placeholder='rating' type='number' min={1} max={5} value={formData.rating} onChange={handleInputChange} id='rating' name='rating'/><br/><br/>
-            <button>Add Comments</button>
-        </form>
-    </div>
-  )
-}
-
-export default CommentForm
+export default CommentForm;
