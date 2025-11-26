@@ -13,6 +13,7 @@ import TicketNum from '../views/TicketNum'
 import FormImp from '../views/FormImp'
 import CommentForm from '../views/CommentForm'
 import Comment from '../views/Comment'
+import CounterEffect from '../views/CounterEffect'
 
 let winCondition=(ticket)=>{
 //   return ticket.every((num)=>num===ticket[0]);
@@ -34,8 +35,9 @@ function App() {
       <ToDo/><hr/>
       <Lottery n={3} winningSum={15} winCondition={winCondition}/><hr></hr>
      <FormImp/><hr/><hr/><hr/>
-     
+
      <Comment/>
+     <CounterEffect/>
     </div>
   )
 }

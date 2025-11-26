@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./CommentForm.css";
 
+
 function CommentForm({ addNewComment }) {
 
   let [formData, setFormData] = useState({
@@ -8,6 +9,8 @@ function CommentForm({ addNewComment }) {
     remark: "",
     rating: "5"
   });
+
+  let [isValid,setIsValid]=useState(true);
 
   let handleInputChange = (event) => {
     setFormData((currData) => ({
@@ -17,11 +20,16 @@ function CommentForm({ addNewComment }) {
   };
 
   let handleSubmit = (event) => {
-    event.preventDefault();
-    console.log("submitted", formData);  // TO VERIFY
+  
+    if(!formData.username){
+      console.log("username is null");
+       event.preventDefault();
+      setIsValid(false);
+      return;
+    }
 
     addNewComment(formData);
-
+      event.preventDefault();
     setFormData({
       username: "",
       remark: "",
@@ -39,6 +47,7 @@ function CommentForm({ addNewComment }) {
         value={formData.username}
         onChange={handleInputChange}
       />
+      {!isValid&&<p className="warning">username can not be empty</p>}
 
       <label htmlFor="remark">Remark :</label>
       <textarea
