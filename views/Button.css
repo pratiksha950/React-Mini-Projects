@@ -1,0 +1,17 @@
+button{
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-top: 30px;
+    justify-content: center;
+    margin-left: 40%;
+    cursor: pointer;
+    background-color: blue;
+    color: wheat;
+}
+button:hover{
+    transform: scale(0.9);
+}
+p{
+    color: white;
+}
